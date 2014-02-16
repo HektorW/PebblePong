@@ -1,0 +1,18 @@
+{
+    "versionLabel": "1.0",
+    "uuid": "3191e987-5aa7-4b49-8da3-7d27cc1b7189",
+    "appKeys": {},
+    "longName": "PebbleApp",
+    "versionCode": 1,
+    "capabilities": [
+        ""
+    ],
+    "shortName": "PebbleApp",
+    "companyName": "HektorW",
+    "watchapp": {
+        "watchface": false
+    },
+    "resources": {
+        "media": []
+    }
+}
