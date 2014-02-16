@@ -2,12 +2,12 @@
     "versionLabel": "1.0",
     "uuid": "3191e987-5aa7-4b49-8da3-7d27cc1b7189",
     "appKeys": {},
-    "longName": "PebbleApp",
+    "longName": "PeeblePong",
     "versionCode": 1,
     "capabilities": [
         ""
     ],
-    "shortName": "PebbleApp",
+    "shortName": "PeeblePong",
     "companyName": "HektorW",
     "watchapp": {
         "watchface": false
