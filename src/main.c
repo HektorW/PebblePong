@@ -102,6 +102,7 @@ int main() {
 
 static void init() {
   window = window_create();
+  window_set_background_color(window, GColorBlack);
   window_stack_push(window, true /* animated */);
 
   Layer* root_layer = window_get_root_layer(window);
@@ -175,6 +176,9 @@ static void spawn_ball() {
  * Draw
  */
 static void draw(Layer* layer, GContext* ctx) { 
+  graphics_context_set_text_color(ctx, GColorWhite);
+  graphics_context_set_fill_color(ctx, GColorWhite);
+
   draw_paddles(ctx);
   draw_ball(ctx);
   
@@ -195,16 +199,14 @@ static void draw_ball(GContext* ctx) {
 }
 
 static void draw_score(Layer* layer, GContext* ctx) {
-  graphics_context_set_text_color(ctx, GColorBlack);
-
   GRect bounds = layer_get_bounds(layer);
 
-  static char str[10];
-  snprintf(str, sizeof(str), "%u - %u", p1_score, p2_score);
+  static char score_str[10];
+  snprintf(score_str, sizeof(score_str), "%u - %u", p1_score, p2_score);
 
   graphics_draw_text (
     ctx,
-    str,
+    score_str,
     fonts_get_system_font(FONT_KEY_FONT_FALLBACK),
     GRect(0, 0, bounds.size.w, 40),
     GTextOverflowModeWordWrap,
@@ -214,7 +216,6 @@ static void draw_score(Layer* layer, GContext* ctx) {
 }
 
 static void draw_pause_message(Layer* layer, GContext* ctx) {
-  graphics_context_set_text_color(ctx, GColorBlack);
   GRect bounds = layer_get_bounds(layer);
 
   graphics_draw_text (
@@ -306,12 +307,14 @@ static int16_t update_paddle(int16_t y, int16_t yvel) {
 static void check_collision() {
   float epsilon = 2.0;
   if(ball_xdir < 0) {
-    if(ball_x < p1_x + paddle_w && ball_x > p1_x + paddle_w - epsilon) {
+    if(ball_x < p1_x + paddle_w && ball_x > p1_x + paddle_w - epsilon &&
+       ball_y + ball_s >= p1_y && ball_y <= p1_y + paddle_h) {
       ball_xdir *= -1;
     }
   }
   else {
-    if(ball_x > p2_x && ball_x < p2_x + epsilon) {
+    if(ball_x + ball_s > p2_x && ball_x + ball_s < p2_x + epsilon &&
+       ball_y + ball_s >= p2_y && ball_y <= p2_y + paddle_h) {
       ball_xdir *= -1;
     }
   }
