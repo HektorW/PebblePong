@@ -167,6 +167,7 @@ static void spawn_ball() {
 
   ball_xdir = 1 - (2 * (rand() % 2));
   ball_ydir = 1 - (rand() % 3);
+  ball_ydir /= (rand() % 3) + 1;
 }
 
 
@@ -191,8 +192,8 @@ static void draw(Layer* layer, GContext* ctx) {
 
 
 static void draw_paddles(GContext* ctx) {
-  graphics_fill_rect(ctx, GRect(p1_x, p1_y, paddle_w, paddle_h), 0, GCornerNone);
-  graphics_fill_rect(ctx, GRect(p2_x, p2_y, paddle_w, paddle_h), 0, GCornerNone);
+  graphics_fill_rect(ctx, GRect(p1_x, p1_y, paddle_w, paddle_h), 3, GCornersAll);
+  graphics_fill_rect(ctx, GRect(p2_x, p2_y, paddle_w, paddle_h), 3, GCornersAll);
 }
 static void draw_ball(GContext* ctx) {
   graphics_fill_rect(ctx, GRect(ball_x, ball_y, ball_s, ball_s), 5, GCornersAll);
